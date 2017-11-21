@@ -21,7 +21,7 @@ export default {
         //.get('https://ncode.syosetu.com/n9669bk/1/')
         .end((err, res) => {
             console.log(err, res);
-            this.result = res.text;
+            this.result = document.createRange().createContextualFragment(res.text).querySelectorAll('div.novel_view')[0].innerHTML;
         })
         //console.log('mixin ready.',this)
     }
