@@ -5,14 +5,30 @@
 </style>
 
 <template>
-  <h1 class="red">{{msg}}</h1>
+  <div>
+    <h1 class="red">{{msg}}</h1>
+    <pre>{{result}}</pre>
+  </div>
 </template>
 
 <script>
-  module.exports = {
-    data: function() {
+  import AjaxMixin from '../mixins/ajax';
+
+  export default {
+    mixins: [ AjaxMixin ],
+    methods: {
+      testMethod: () => {
+        console.log('Component Test')
+      }
+    },
+    mounted () {
+      console.log('Component ready.')
+      this.testMethod()
+      this.testMixin()
+    },
+    data: () => {
       return {
-        msg: 'Hello world!'
+        msg: 'Hello world!',
       }
     }
   }
