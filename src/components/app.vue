@@ -114,24 +114,32 @@
         console.log('Component Test')
       },
       prevPage: (e) => {
-console.log('prevPage',e);
         const pageContainer = document.getElementById('page').firstChild;
         const pageContents  = pageContainer.firstChild;
         const pageWidth = parseInt(pageContainer.clientWidth / 20) * 20;
         //
-        const curOffset = parseInt(pageContents.style.right) || 0;
-        pageContents.style.right = Math.min(curOffset + pageWidth, 0) + 'px';
-        console.log([pageContainer]);
+        const curOffset  = parseInt(pageContents.style.right) || 0;
+        const limitOffset= 0; 
+        let   newOffset  = curOffset + pageWidth;
+        if (limitOffset < newOffset) { 
+          console.log('load prev!!');
+          newOffset = limitOffset;
+        }
+        pageContents.style.right = newOffset + 'px';
       },
       nextPage: (e) => {
-console.log('nextPage',e);
         const pageContainer = document.getElementById('page').firstChild;
         const pageContents  = pageContainer.firstChild;
         const pageWidth = parseInt(pageContainer.clientWidth / 20) * 20;
         //
-        const curOffset = parseInt(pageContents.style.right) || 0;
-        pageContents.style.right = Math.max(curOffset - pageWidth, -parseInt((pageContents.clientWidth - pageWidth) / 20) * 20) + 'px';
-        console.log([pageContainer]);
+        const curOffset  = parseInt(pageContents.style.right) || 0;
+        const limitOffset= -parseInt((pageContents.clientWidth - pageWidth) / 20) * 20; 
+        let   newOffset  = curOffset - pageWidth;
+        if (newOffset < limitOffset) { 
+          console.log('load next!!');
+          newOffset = limitOffset;
+        }
+        pageContents.style.right = newOffset + 'px';
       }
     },
     mounted () {
