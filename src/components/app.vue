@@ -127,8 +127,8 @@
   export default {
     mixins: [ AjaxMixin ],
     methods: {
-      testMethod: () => {
-        console.log('Component Test')
+      testMethod: function () {
+        console.log('Component Test',this)
       },
       prevPage: (e) => {
         const pageContainer = document.getElementById('page').firstChild;
@@ -160,9 +160,10 @@
       }
     },
     mounted () {
-      console.log('Component ready.');
+      console.log('Component ready.',this);
       this.testMethod();
       this.testMixin();
+      this.getContents('n9669bk', 1);
     },
     data: () => {
       return {
