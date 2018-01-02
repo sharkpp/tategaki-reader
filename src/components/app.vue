@@ -90,8 +90,12 @@
 <template>
   <div id="content" >
     <div id="page" class="vertical" >
-      <div>
-        <p class="no-select" v-html="result">{{ result }}</p>
+      <div class="no-select">
+        <p>{{ title }}</p>
+        <p>{{ author }}</p>
+        <p>{{ chapterTitle }}</p>
+        <p>{{ subTitle }}</p>
+        <p v-html="contents">{{ contents }}</p>
       </div>
     </div>
     <div id="touch-area">
@@ -107,6 +111,19 @@
 <script>
   import AjaxMixin from '../mixins/ajax';
 
+/*
+------ page : 1
+作品名
+　　　作者
+------ page : 2
+章名
+副題
+
+本文....
+------
+あたり？
+*/
+
   export default {
     mixins: [ AjaxMixin ],
     methods: {
@@ -116,12 +133,12 @@
       prevPage: (e) => {
         const pageContainer = document.getElementById('page').firstChild;
         const pageContents  = pageContainer.firstChild;
-        const pageWidth = parseInt(pageContainer.clientWidth / 20) * 20;
+        const pageWidth     = parseInt(pageContainer.clientWidth / 20) * 20;
         //
         const curOffset  = parseInt(pageContents.style.right) || 0;
-        const limitOffset= 0; 
+        const limitOffset= 0;
         let   newOffset  = curOffset + pageWidth;
-        if (limitOffset < newOffset) { 
+        if (limitOffset < newOffset) {
           console.log('load prev!!');
           newOffset = limitOffset;
         }
@@ -143,9 +160,9 @@
       }
     },
     mounted () {
-      console.log('Component ready.')
-      this.testMethod()
-      this.testMixin()
+      console.log('Component ready.');
+      this.testMethod();
+      this.testMixin();
     },
     data: () => {
       return {
